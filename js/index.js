@@ -3,8 +3,10 @@ let draw = 0;
 let userWin = 0;
 let computerWin = 0;
 
-function startGame() {
-  const userAnswer = prompt('Play rock paper scissors game');
+function getUserInput() {
+  const userAnswer = prompt(
+    'Please enter R, P or S to signify my choice of rock, paper, or scissors'
+  );
   return userAnswer;
 }
 
@@ -12,30 +14,20 @@ function startGame() {
 //collect data to see what input its
 
 //computer generates rock paper sissors
-function getRandomNum() {
-  return Math.floor(Math.random() * 3);
-}
+function getComputerResult() {
+  const randomNum = Math.floor(Math.random() * 3);
+  const rockPaperScissorsArry = ['r', 'p', 's'];
 
-// convert results
-function convertResults() {
-  const randomNum = getRandomNum();
-
-  if (randomNum === 0) {
-    return 'rock';
-  } else if (randomNum === 1) {
-    return 'paper';
-  } else {
-    return 'sissors';
-  }
+  return rockPaperScissorsArry[randomNum];
 }
-// console.log(convertResults());
 
 //compare results
 
 function compareResults() {
-  const userAnswer = startGame();
-  const computerResult = convertResults();
+  const userAnswer = getUserInput();
+  const computerResult = getComputerResult();
   console.log(userAnswer, computerResult);
+  userAnswer = userAnswer.toLowerCase;
 
   //if tie draw add 1
   if (userAnswer === computerResult) {
@@ -52,7 +44,7 @@ function compareResults() {
   //if computer wins add 1 to computer
 }
 
-compareResults();
+// compareResults();
 
 // add to taily
 
