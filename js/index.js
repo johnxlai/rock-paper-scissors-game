@@ -7,6 +7,9 @@ function getUserInput() {
   const userAnswer = prompt(
     'Please enter R, P or S to signify my choice of rock, paper, or scissors'
   );
+  // if (!userAnswer) {
+  //   prompt('please enter somethiing');
+  // }
   return userAnswer;
 }
 
@@ -24,15 +27,26 @@ function getComputerResult() {
 //compare results
 
 function compareResults() {
-  const userAnswer = getUserInput();
-  const computerResult = getComputerResult();
+  // let userAnswer = getUserInput();
+  let userAnswer = 'r';
+  let computerResult = getComputerResult();
   console.log(userAnswer, computerResult);
-  userAnswer = userAnswer.toLowerCase;
 
   //if tie draw add 1
-  if (userAnswer === computerResult) {
-    draw = +1;
-    console.log(draw);
+  if (userAnswer == computerResult) {
+    draw++;
+    console.log(`draw ${draw}`);
+  } else if (
+    (userAnswer == 'p' && computerResult == 'r') ||
+    (userAnswer == 's' && computerResult == 'p') ||
+    (userAnswer == 'r' && computerResult == 's')
+  ) {
+    userWin++;
+    console.log(`user win ${userWin}`);
+  } else {
+    console.log(userAnswer, computerResult);
+    computerWin++;
+    console.log(`comp win ${computerWin}`);
   }
 
   //paper > rock
@@ -44,7 +58,7 @@ function compareResults() {
   //if computer wins add 1 to computer
 }
 
-// compareResults();
+compareResults();
 
 // add to taily
 
