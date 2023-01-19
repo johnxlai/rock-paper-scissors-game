@@ -1,7 +1,7 @@
 //Rock paper scissors game
 let draw = 0;
-let userWin = 0;
-let computerWin = 0;
+let userWon = 0;
+let computerWon = 0;
 
 function getUserInput() {
   const userAnswer = prompt(
@@ -24,6 +24,14 @@ function getComputerResult() {
   return rockPaperScissorsArry[randomNum];
 }
 
+// show results
+function showResults(result) {
+  alert(
+    result +
+      ` Total: draw ${draw}, User Won ${userWon}, Computer Won ${computerWon}`
+  );
+}
+
 //compare results
 
 function compareResults() {
@@ -35,35 +43,39 @@ function compareResults() {
   //if tie draw add 1
   if (userAnswer == computerResult) {
     draw++;
-    console.log(`draw ${draw}`);
+    console.log(`Draw ${draw}`);
+    showResults(`Draw ${draw}`);
   } else if (
+    //paper > rock
+    //sissors > paper
+    //Rock > sissors
     (userAnswer == 'p' && computerResult == 'r') ||
     (userAnswer == 's' && computerResult == 'p') ||
     (userAnswer == 'r' && computerResult == 's')
   ) {
-    userWin++;
-    console.log(`user win ${userWin}`);
+    //if user wins add 1 to winner
+    userWon++;
+    console.log(`User Won ${userWon}`);
+    showResults(`User Won ${userWon}`);
   } else {
+    //if computer wins add 1 to computer
     console.log(userAnswer, computerResult);
-    computerWin++;
-    console.log(`comp win ${computerWin}`);
+    computerWon++;
+    console.log(`Comp Won ${computerWon}`);
+    showResults(`Comp Won ${computerWon}`);
   }
-
-  //paper > rock
-
-  //sissors > paper
-  //Rock > sissors
-
-  //if user wins add 1 to winner
-  //if computer wins add 1 to computer
 }
 
-compareResults();
-
-// add to taily
-
 // Prompt user to play again
+function playAgain() {
+  if (!window.confirm('Do you want to play again?')) {
+    // run game
+    console.log('non');
+    return;
+  }
+  console.log('yes');
+  getUserInput();
+  return;
+}
 
 //if playing continute game
-
-//if stop show results
