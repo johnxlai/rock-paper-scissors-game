@@ -3,18 +3,13 @@ let draw = 0;
 let userWon = 0;
 let computerWon = 0;
 
+//collect data to see what input its
 function getUserInput() {
-  const userAnswer = prompt(
-    'Please enter R, P or S to signify my choice of rock, paper, or scissors'
+  let userAnswer = prompt(
+    'Please enter r, p or s to signify my choice of rock, paper, or scissors'
   );
-  // if (!userAnswer) {
-  //   prompt('please enter somethiing');
-  // }
   return userAnswer;
 }
-
-//user input field
-//collect data to see what input its
 
 //computer generates rock paper sissors
 function getComputerResult() {
@@ -30,52 +25,57 @@ function showResults(result) {
     result +
       ` Total: draw ${draw}, User Won ${userWon}, Computer Won ${computerWon}`
   );
+  playAgain();
+}
+
+// End Game
+function thankYouforPlaying() {
+  alert('thank you for playing');
 }
 
 //compare results
+function startGame() {
+  let userAnswer = getUserInput();
+  //End game if user is blank
+  if (!userAnswer) {
+    thankYouforPlaying();
+    return;
+  }
 
-function compareResults() {
-  // let userAnswer = getUserInput();
-  let userAnswer = 'r';
+  userAnswer = userAnswer.toLowerCase();
+
   let computerResult = getComputerResult();
-  console.log(userAnswer, computerResult);
 
   //if tie draw add 1
   if (userAnswer == computerResult) {
     draw++;
-    console.log(`Draw ${draw}`);
-    showResults(`Draw ${draw}`);
+
+    showResults(`Draw This Round`);
   } else if (
-    //paper > rock
-    //sissors > paper
-    //Rock > sissors
+    //paper > rock || sissors > paper || Rock > sissors
     (userAnswer == 'p' && computerResult == 'r') ||
     (userAnswer == 's' && computerResult == 'p') ||
     (userAnswer == 'r' && computerResult == 's')
   ) {
     //if user wins add 1 to winner
     userWon++;
-    console.log(`User Won ${userWon}`);
-    showResults(`User Won ${userWon}`);
+    showResults(`User Won This Round`);
   } else {
     //if computer wins add 1 to computer
-    console.log(userAnswer, computerResult);
     computerWon++;
-    console.log(`Comp Won ${computerWon}`);
-    showResults(`Comp Won ${computerWon}`);
+    showResults(`Comp Won This Round`);
   }
 }
 
 // Prompt user to play again
 function playAgain() {
   if (!window.confirm('Do you want to play again?')) {
-    // run game
-    console.log('non');
-    return;
+    // End Game
+    thankYouforPlaying();
   }
-  console.log('yes');
-  getUserInput();
-  return;
+  //Run game Again
+  startGame();
 }
 
-//if playing continute game
+//Inital Load
+startGame();
