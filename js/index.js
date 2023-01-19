@@ -8,7 +8,18 @@ function getUserInput() {
   let userAnswer = prompt(
     'Please enter r, p or s to signify my choice of rock, paper, or scissors'
   );
-  return userAnswer;
+  //End game if user is blank
+  if (!userAnswer) {
+    thankYouforPlaying();
+    return;
+  }
+  if (userAnswer != 'r' || userAnswer != 'p' || userAnswer != 's') {
+    userAnswer = prompt(`Please enter r, p or s only.`);
+  }
+
+  userAnswer = userAnswer.toLowerCase();
+
+  startGame(userAnswer);
 }
 
 //computer generates rock paper sissors
@@ -34,28 +45,19 @@ function thankYouforPlaying() {
 }
 
 //compare results
-function startGame() {
-  let userAnswer = getUserInput();
-  //End game if user is blank
-  if (!userAnswer) {
-    thankYouforPlaying();
-    return;
-  }
-
-  userAnswer = userAnswer.toLowerCase();
-
+function startGame(vaildatedAnswer) {
   let computerResult = getComputerResult();
 
   //if tie draw add 1
-  if (userAnswer == computerResult) {
+  if (vaildatedAnswer == computerResult) {
     draw++;
 
     showResults(`Draw This Round`);
   } else if (
     //paper > rock || sissors > paper || Rock > sissors
-    (userAnswer == 'p' && computerResult == 'r') ||
-    (userAnswer == 's' && computerResult == 'p') ||
-    (userAnswer == 'r' && computerResult == 's')
+    (vaildatedAnswer == 'p' && computerResult == 'r') ||
+    (vaildatedAnswer == 's' && computerResult == 'p') ||
+    (vaildatedAnswer == 'r' && computerResult == 's')
   ) {
     //if user wins add 1 to winner
     userWon++;
@@ -74,8 +76,8 @@ function playAgain() {
     thankYouforPlaying();
   }
   //Run game Again
-  startGame();
+  getUserInput();
 }
 
 //Inital Load
-startGame();
+getUserInput();
